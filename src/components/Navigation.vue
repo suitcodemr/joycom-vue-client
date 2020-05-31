@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-bottom-navigation fixed>
-			<v-btn value="profil">
+			<v-btn value="profil" to="/login">
 				<!-- <span>Profil</span> -->
 				<v-icon>mdi-account</v-icon>
 			</v-btn>

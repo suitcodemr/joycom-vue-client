@@ -10,6 +10,9 @@
 <script>
 import Navigation from './components/Navigation';
 
+import 'vue-slick-carousel/dist/vue-slick-carousel.css';
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
+
 export default {
 	name: 'App',
 
@@ -22,3 +25,7 @@ export default {
 	}),
 };
 </script>
+
+<style>
+@import './styles/additional.css';
+</style>
