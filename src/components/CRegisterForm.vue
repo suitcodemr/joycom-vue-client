@@ -2,9 +2,9 @@
 	<v-form ref="form" v-model="valid">
 		<div class="form-wrapper">
 			<v-container>
-				<h2 class="page-header">Einloggen</h2>
+				<h2 class="page-header">Registrieren</h2>
 				<p class="page-header-subtitle">
-					... und Treffen vereinbaren!
+					... und mit der Community in Kontakt treten!
 				</p>
 				<v-row>
 					<v-col cols="12" md="4">
@@ -15,7 +15,14 @@
 							required
 						></v-text-field>
 					</v-col>
-
+					<v-col cols="12" md="4">
+						<v-text-field
+							v-model="email"
+							label="Email"
+							:rules="emailRules"
+							required
+						></v-text-field>
+					</v-col>
 					<v-col cols="12" md="4">
 						<v-text-field
 							v-model="password"
@@ -26,6 +33,22 @@
 							:rules="passRules"
 						></v-text-field>
 					</v-col>
+					<v-col cols="12" md="4">
+						<v-text-field
+							v-model="confirmPassword"
+							label="Passwort erneut eingeben..."
+							:append-icon="confirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+							@click:append="() => (confirmPassword = !confirmPassword)"
+							type="password"
+							:rules="passRules"
+						></v-text-field>
+					</v-col>
+					<v-col cols="12" md="4">
+						<v-checkbox
+							v-model="checkbox"
+							:label="'Bitte akzeptieren Sie unsere AGBs.'"
+						></v-checkbox>
+					</v-col>
 				</v-row>
 				<v-row>
 					<v-col>
@@ -35,10 +58,10 @@
 							class="mr-4"
 							@click="validate"
 						>
-							Einloggen
+							Registrieren
 						</v-btn>
 						<v-btn color="secondary" @click="validate">
-							Registrieren
+							Einloggen
 						</v-btn>
 						<v-btn class="mt-7" color="red" @click="logoutHandler">
 							Ausloggen
@@ -51,48 +74,61 @@
 </template>
 
 <script>
-import { LOGIN_USER } from '../utils/graphql';
+import { REGISTER_USER } from '../utils/graphql';
 import { mapActions } from 'vuex';
 export default {
-	name: 'Login',
+	name: 'CRegisterForm',
 	data() {
 		return {
 			valid: true,
 			username: '',
+			email: '',
 			password: '',
+			confirmPassword: '',
 			nameRules: [
 				(v) => !!v || 'Sie müssen ein Benutzernamen angeben',
 				(v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
 			],
 			passRules: [
 				(v) => !!v || 'Sie müssen ein Passwort angeben',
-				(v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
+				(v) =>
+					(v && v.length <= 10) || 'Passwort must be less than 10 characters',
 			],
 		};
 	},
 	// apollo: {},
 	methods: {
-		...mapActions(['login', 'logout']),
+		...mapActions(['login', 'register', 'logout']),
 		validate() {
 			console.log(this.username, this.password);
-			const userData = { username: this.username, password: this.password };
+			const userData = {
+				username: this.username,
+				email: this.email,
+				password: this.password,
+				confirmPassword: this.confirmPassword,
+			};
 			this.reset();
 			this.username = '';
+			this.email = '';
 			this.password = '';
+			this.confirmPassword = '';
 			this.$apollo
 				.mutate({
 					// Query
-					mutation: LOGIN_USER,
+					mutation: REGISTER_USER,
 					// Parameters
 					variables: {
 						username: userData.username,
+						email: userData.email,
 						password: userData.password,
+						confirmPassword: userData.confirmPassword,
 					},
 				})
 				.then((data) => {
 					// Result
 					console.log(data);
-					this.login(data);
+					this.register(data);
+					this.$router.push('/');
 				})
 				.catch((error) => {
 					// Error

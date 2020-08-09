@@ -13,7 +13,6 @@ export const FETCH_EVENT_QUERY = gql`
 			userList {
 				_id
 				username
-				avatar
 			}
 			maxUsers
 			category
@@ -70,7 +69,38 @@ export const FETCH_CATEGORY_EVENTS_QUERY = gql`
 			userList {
 				_id
 				username
-				avatar
+			}
+			likes {
+				username
+			}
+			likeCount
+			comments {
+				_id
+				username
+				body
+				createdAt
+			}
+			commentCount
+		}
+	}
+`;
+
+export const FETCH_CATEGORY_EVENTS_QUERY_CLIENT = gql`
+	query getEventsCategory ($categoryId: ID!) {
+		getEventsCategory (categoryId: $categoryId) @client {
+			_id
+			name
+			creator
+			location
+			time
+			duration
+			body
+			category
+			maxUsers
+			userCount
+			userList {
+				_id
+				username
 			}
 			likes {
 				username
@@ -90,6 +120,30 @@ export const FETCH_CATEGORY_EVENTS_QUERY = gql`
 export const LOGIN_USER = gql`
 	mutation login($username: String!, $password: String!) {
 		login(username: $username, password: $password) {
+			_id
+			email
+			username
+			createdAt
+			token
+		}
+	}
+`;
+
+export const REGISTER_USER = gql`
+	mutation register(
+		$username: String!
+		$email: String!
+		$password: String!
+		$confirmPassword: String!
+	) {
+		register(
+			registerInput: {
+				username: $username
+				email: $email
+				password: $password
+				confirmPassword: $confirmPassword
+			}
+		) {
 			_id
 			email
 			username

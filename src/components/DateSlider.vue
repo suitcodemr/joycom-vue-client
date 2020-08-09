@@ -1,5 +1,8 @@
 <template>
-	<div v-if="this.dates.arrDates.length > 0">
+	<div v-if="this.dates.arrDates.length > 0" class="dateSliderWrapper">
+		<div class="chooseDate">
+			<button>Kalender</button>
+		</div>
 		<VueSlickCarousel v-bind="slickCarouselSettings" class="dateSlider">
 			<DateSliderCard
 				v-for="(date, index) in dates.arrDates"

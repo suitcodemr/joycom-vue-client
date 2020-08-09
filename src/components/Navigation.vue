@@ -1,28 +1,26 @@
 <template>
-	<div>
-		<v-bottom-navigation fixed>
-			<v-btn value="profil" to="/login">
-				<!-- <span>Profil</span> -->
-				<v-icon>mdi-account</v-icon>
-			</v-btn>
-			<v-btn value="search">
-				<!-- <span>Suchen</span> -->
-				<v-icon>mdi-magnify</v-icon>
-			</v-btn>
-			<v-btn value="home" to="/">
-				<!-- <span>Home</span> -->
-				<v-icon>mdi-home</v-icon>
-			</v-btn>
-			<v-btn value="add">
-				<!-- <span>Add</span> -->
-				<v-icon>mdi-plus-box-outline</v-icon>
-			</v-btn>
-			<v-btn value="favorites">
-				<!-- <span>Favorites</span> -->
-				<v-icon>mdi-heart</v-icon>
-			</v-btn>
-		</v-bottom-navigation>
-	</div>
+	<v-bottom-navigation fixed>
+		<v-btn value="profil" to="/profile">
+			<!-- <span>Profil</span> -->
+			<v-icon>mdi-account</v-icon>
+		</v-btn>
+		<v-btn value="add">
+			<!-- <span>Suchen</span> -->
+			<v-icon>mdi-plus-box-outline</v-icon>
+		</v-btn>
+		<v-btn value="home" to="/">
+			<!-- <span>Home</span> -->
+			<v-icon>mdi-home</v-icon>
+		</v-btn>
+		<v-btn value="message">
+			<!-- <span>Add</span> -->
+			<v-icon>mdi-message-outline</v-icon>
+		</v-btn>
+		<v-btn value="radar">
+			<!-- <span>Favorites</span> -->
+			<v-icon>mdi-radar</v-icon>
+		</v-btn>
+	</v-bottom-navigation>
 </template>
 
 <script>

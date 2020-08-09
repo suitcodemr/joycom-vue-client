@@ -11,7 +11,16 @@
 			<p class="creator">erstellt von {{ event.creator }}</p>
 			<v-tooltip bottom>
 				<template v-slot:activator="{ on }">
-					<v-btn link to="/" color="primary" dark v-on="on">Infos</v-btn>
+					<v-btn
+						link
+						:to="{
+							path: `/singleEventPage/${categoryId}/${event._id}`,
+						}"
+						color="primary"
+						dark
+						v-on="on"
+						>Infos</v-btn
+					>
 				</template>
 				<span>mehr Informationen</span>
 			</v-tooltip>
@@ -22,7 +31,15 @@
 <script>
 export default {
 	name: 'EventItem',
-	props: ['event'],
+	props: ['event', 'categoryId'],
+	data: function() {
+		return {};
+	},
+	computed: {
+		eventPath: function() {
+			return '/singleEventPage/' + this.categoryId + '/' + this.event._id;
+		},
+	},
 };
 </script>
 

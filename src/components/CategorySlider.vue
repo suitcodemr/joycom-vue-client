@@ -1,6 +1,6 @@
 <template>
 	<div v-if="getCategories">
-		<VueSlickCarousel v-bind="slickCarouselSettings" class="categorySlider">
+		<VueSlickCarousel v-bind="slickCarouselSettings" class="categorySlider mt-2">
 			<CategorySliderCard
 				v-for="(category, index) in getCategories"
 				:key="index"

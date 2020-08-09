@@ -4,7 +4,12 @@
 			loading...
 		</template>
 		<template v-else>
-			<EventItem v-for="(event, index) in events" :key="index" :event="event" />
+			<EventItem
+				v-for="(event, index) in events"
+				:key="index"
+				:event="event"
+				:categoryId="categoryId"
+			/>
 		</template>
 	</div>
 </template>
@@ -13,7 +18,7 @@
 import EventItem from './EventItem';
 export default {
 	name: 'EventList',
-	props: ['events'],
+	props: ['events', 'categoryId'],
 	components: { EventItem },
 	data() {
 		return {};
