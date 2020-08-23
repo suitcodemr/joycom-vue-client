@@ -19,8 +19,8 @@ const actions = {
 const mutations = {
 	LOGIN: (state, user) => {
 		state.loggedIn = true;
-		state.user = user.data.login;
-		state.token = user.data.login.token;
+		state.user = user && user.data ? user.data.login : user;
+		state.token = user && user.data ? user.data.login.token : localStorage.getItem('jwtToken');
 		localStorage.setItem('jwtToken', state.token);
 	},
 	REGISTER: (state, user) => {

@@ -37,7 +37,7 @@
 						>
 							Einloggen
 						</v-btn>
-						<v-btn color="secondary" @click="validate">
+						<v-btn color="secondary" to="/profile?view=register" @click="changeCurrentProfileView('register')">
 							Registrieren
 						</v-btn>
 						<v-btn class="mt-7" color="red" @click="logoutHandler">
@@ -71,6 +71,7 @@ export default {
 		};
 	},
 	// apollo: {},
+	inject: ['changeCurrentProfileView'],
 	methods: {
 		...mapActions(['login', 'logout']),
 		validate() {

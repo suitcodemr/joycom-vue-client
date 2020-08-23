@@ -1,6 +1,6 @@
 <template>
 	<v-bottom-navigation fixed>
-		<v-btn value="profil" to="/profile">
+		<v-btn value="profil" @click.stop="drawerCallback()">
 			<!-- <span>Profil</span> -->
 			<v-icon>mdi-account</v-icon>
 		</v-btn>
@@ -8,7 +8,7 @@
 			<!-- <span>Suchen</span> -->
 			<v-icon>mdi-plus-box-outline</v-icon>
 		</v-btn>
-		<v-btn value="home" to="/">
+		<v-btn value="home" to="/" @click.stop="drawer ? drawerCallback() : null">
 			<!-- <span>Home</span> -->
 			<v-icon>mdi-home</v-icon>
 		</v-btn>
@@ -26,9 +26,11 @@
 <script>
 export default {
 	name: 'Navigation',
+	props: ["drawer"],
 	data() {
 		return {};
 	},
+	inject: ['drawerCallback'],
 };
 </script>
 

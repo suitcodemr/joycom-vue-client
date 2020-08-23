@@ -1,18 +1,4 @@
-<template>
-	<div v-if="this.dates.arrDates.length > 0" class="dateSliderWrapper">
-		<div class="chooseDate">
-			<button>Kalender</button>
-		</div>
-		<VueSlickCarousel v-bind="slickCarouselSettings" class="dateSlider">
-			<DateSliderCard
-				v-for="(date, index) in dates.arrDates"
-				:key="index"
-				:date="date"
-				:currentDayIndex="dates.currentDayIndex"
-			/>
-		</VueSlickCarousel>
-	</div>
-</template>
+<template lang="pug" src="./CDateSlider.pug"></template>
 
 <script>
 import VueSlickCarousel from 'vue-slick-carousel';
@@ -20,11 +6,11 @@ import VueSlickCarousel from 'vue-slick-carousel';
 import { mapActions } from 'vuex';
 
 // Component
-import DateSliderCard from './DateSliderCard';
+import CDateSliderCard from './CDateSliderCard/CDateSliderCard.vue';
 
 export default {
 	name: 'DateSlider',
-	components: { VueSlickCarousel, DateSliderCard },
+	components: { VueSlickCarousel, CDateSliderCard },
 	data() {
 		return {
 			dates: {
@@ -99,4 +85,4 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" src="./CDateSlider.scss" />

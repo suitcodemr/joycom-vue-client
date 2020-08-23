@@ -1,0 +1,13 @@
+.slick-slider.dateSlider {
+	.slick-list {
+		.slick-track{
+			.slick-slide{
+				.v-sheet--outlined {
+					&.mr_selected {
+						background-color: #ffff7f;
+					}
+				}
+			}
+		}
+	}
+}

@@ -31,6 +31,7 @@
 							@click:append="() => (password = !password)"
 							type="password"
 							:rules="passRules"
+							required
 						></v-text-field>
 					</v-col>
 					<v-col cols="12" md="4">
@@ -41,12 +42,15 @@
 							@click:append="() => (confirmPassword = !confirmPassword)"
 							type="password"
 							:rules="passRules"
+							required
 						></v-text-field>
 					</v-col>
 					<v-col cols="12" md="4">
 						<v-checkbox
 							v-model="checkbox"
 							:label="'Bitte akzeptieren Sie unsere AGBs.'"
+							:rules="[v => !!v || 'You must agree to continue!']"
+							required
 						></v-checkbox>
 					</v-col>
 				</v-row>
@@ -60,7 +64,7 @@
 						>
 							Registrieren
 						</v-btn>
-						<v-btn color="secondary" @click="validate">
+						<v-btn color="secondary" to="/profile?view=login" @click="changeCurrentProfileView('login')">
 							Einloggen
 						</v-btn>
 						<v-btn class="mt-7" color="red" @click="logoutHandler">
@@ -85,18 +89,22 @@ export default {
 			email: '',
 			password: '',
 			confirmPassword: '',
+			checkbox: false,
 			nameRules: [
 				(v) => !!v || 'Sie müssen ein Benutzernamen angeben',
 				(v) => (v && v.length <= 10) || 'Name must be less than 10 characters',
 			],
+			emailRules: [
+				(v) => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'E-mail must be valid'
+			],
 			passRules: [
 				(v) => !!v || 'Sie müssen ein Passwort angeben',
-				(v) =>
-					(v && v.length <= 10) || 'Passwort must be less than 10 characters',
+				(v) => (v && v.length <= 10) || 'Passwort must be less than 10 characters',
 			],
 		};
 	},
 	// apollo: {},
+	inject: ['changeCurrentProfileView'],
 	methods: {
 		...mapActions(['login', 'register', 'logout']),
 		validate() {
@@ -112,6 +120,7 @@ export default {
 			this.email = '';
 			this.password = '';
 			this.confirmPassword = '';
+			this.checkbox = false;
 			this.$apollo
 				.mutate({
 					// Query
@@ -141,6 +150,6 @@ export default {
 		logoutHandler() {
 			this.logout();
 		},
-	},
+	}
 };
 </script>

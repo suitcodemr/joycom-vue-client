@@ -1,13 +1,14 @@
 <template>
 	<v-app>
-		<v-content>
-			<StartScreen />
+		<CTopNavigation />
+		<v-main>
+			<!-- <StartScreen /> -->
 			<!-- <SearchBar /> -->
-			<!-- <SideBar /> -->
-			<TopNavigation />
-			<router-view />
-			<Navigation />
-		</v-content>
+			<CSideBar :drawer="drawer"/>
+			<router-view :drawer="drawer"/>
+				
+		</v-main>
+		<Navigation :drawer="drawer"/>
 	</v-app>
 </template>
 
@@ -15,11 +16,11 @@
 
 // Test Commit
 
-import TopNavigation from './components/TopNavigation';
+import CTopNavigation from './components/CTopNavigation/CTopNavigation.vue';
 import Navigation from './components/Navigation';
-import StartScreen from './components/StartScreen';
+// import StartScreen from './components/StartScreen';
 // import SearchBar from './components/SearchBar';
-// import SideBar from '../components/SideBar';
+import CSideBar from './components/CSidebar/CSidebar.vue';
 
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
@@ -28,18 +29,29 @@ export default {
 	name: 'App',
 
 	components: {
-		TopNavigation,
+		CTopNavigation,
 		Navigation,
-		StartScreen,
-		// SideBar,
+		// StartScreen,
+		CSideBar,
 	},
 
 	data() {
-		return {};
+		return {
+			drawer: false
+		};
 	},
+    provide: function() {
+        return {
+            drawerCallback: this.drawerCallback,
+        };
+	},
+    methods: {
+        drawerCallback: function() {
+			return (this.drawer = !this.drawer);
+        },
+	}
+
 };
 </script>
 
-<style>
-@import './styles/additional.css';
-</style>
+<style lang="scss" src='./scss/all.scss'/>

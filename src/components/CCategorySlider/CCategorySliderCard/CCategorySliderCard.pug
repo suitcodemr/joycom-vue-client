@@ -1,0 +1,12 @@
+div
+	v-card(
+		class="category bg-dark text-white"
+		:class="'category_' + category._id"
+		@click="setCurrentCategory"
+	)
+		img(:src="require(`@/assets/img/categoryThumbnail_${this.category._id}.jpg`)")
+		div(v-if="category.eventCount >= 1")
+			.card-img-overlay
+				.card-title.h5 {{ category.name }}
+				.card-link.counter Events: {{ category.eventCount }}
+				.card-link.arrow

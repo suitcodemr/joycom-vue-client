@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import jwtDecode from 'jwt-decode';
 import VHome from '../views/VHome.vue';
 import About from '../views/About.vue';
 import VProfile from '../views/VProfile.vue';
@@ -9,22 +10,24 @@ import store from '../store';
 
 Vue.use(VueRouter);
 
-const ifNotAuthenticated = (to, from, next) => {
+const checkIfUserAuthenticated = (to, from, next) => {
 	if (!store.getters.getUser.loggedIn) {
-		console.log('isNotAuthenticated');
 		next();
 		return;
 	}
-	console.log('isAuthenticated');
 	next('/');
 };
 
 const checkJwtToken = (to, from, next) => {
 	if (localStorage.getItem('jwtToken')) {
+		const userData = jwtDecode(localStorage.getItem('jwtToken'));
+		console.log(userData);
+		console.log(store);
+		store.commit('LOGIN', userData)
 		next();
 		return;
 	}
-	next('/');
+	next();
 };
 
 const routes = [
@@ -44,7 +47,7 @@ const routes = [
 	{
 		path: '/profile',
 		name: 'VProfile',
-		beforeEnter: ifNotAuthenticated,
+		beforeEnter: checkIfUserAuthenticated,
 		component: VProfile,
 		meta: {},
 	},

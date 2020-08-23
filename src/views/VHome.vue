@@ -3,7 +3,7 @@
 		<v-container>
 			<!-- <SearchBar /> -->
 			<!-- <p class="mt-3">Was steht in deiner Umgebung an...</p> -->
-			<DateSlider />
+			<CDateSlider />
 		</v-container>
 		<v-divider></v-divider>
 		<v-container>
@@ -12,7 +12,7 @@
 				>Loading...</template
 			>
 			<template v-else>
-				<CategorySlider :getCategories="getCategories" />
+				<CCategorySlider :getCategories="getCategories" />
 			</template>
 		</v-container>
 		<v-divider></v-divider>
@@ -37,14 +37,14 @@ import {
 } from '../utils/graphql';
 
 // Components
-import DateSlider from '../components/DateSlider';
-import CategorySlider from '../components/CategorySlider';
-import EventList from '../components/EventList';
+import CDateSlider from '@/components/CDateSlider/CDateSlider.vue';
+import CCategorySlider from '@/components/CCategorySlider/CCategorySlider.vue';
+import EventList from '@/components/EventList';
 // import SearchBar from '../components/SearchBar';
 
 export default {
 	name: 'VHome',
-	components: { DateSlider, CategorySlider, EventList },
+	components: { CDateSlider, CCategorySlider, EventList },
 	data() {
 		return {
 			getCategories: [],
@@ -71,11 +71,20 @@ export default {
 					}`,
 				};
 			},
+			skip: true
 		},
 	},
 	methods: {
 		...mapGetters(['getSelectedCategory']),
 		...mapActions(['setCategory']),
 	},
+	watch: {
+		getCategories: function() {
+			if(this.getCategories.length > 0){
+				this.$apollo.queries.getEventsCategory.skip = false;
+				this.$apollo.queries.getEventsCategory.refetch();
+			}
+		}
+	}
 };
 </script>

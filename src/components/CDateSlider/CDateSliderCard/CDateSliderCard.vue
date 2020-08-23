@@ -19,7 +19,7 @@
 <script>
 import { mapActions } from 'vuex';
 export default {
-	name: 'DateSliderCard',
+	name: 'CDateSliderCard',
 	props: ['date', 'currentDayIndex'],
 	methods: {
 		...mapActions(['setDate']),

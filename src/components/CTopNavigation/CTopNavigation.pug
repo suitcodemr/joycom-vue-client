@@ -1,0 +1,19 @@
+.top-navigation
+	.logo-wrapper
+		img(:src="logo" alt="")
+
+	.searchbar(:class="[isSearchBarOpen ? 'open' : '']")
+		input(type="text" v-model="search")
+		.icon-search(@click="toggleSearchBar")
+			v-icon {{ isSearchBarOpen ? 'mdi-plus' : 'mdi-magnify' }}
+
+		.arrow(@click="submit")
+			v-icon(color="white") mdi-chevron-right
+
+	.icon-container
+		//- .icon-wrapper
+		//- 	v-icon mdi-magnify
+
+		.icon-wrapper
+			v-icon mdi-bell-outline
+			span.notification-counter {{ notifications }}

@@ -41,7 +41,7 @@ export const FETCH_CATEGORY_QUERY = gql`
 `;
 
 export const FETCH_CATEGORIES_QUERY = gql`
-	query GetCategories {
+	query getCategories {
 		getCategories {
 			_id
 			name

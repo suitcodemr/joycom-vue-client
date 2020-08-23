@@ -1,14 +1,4 @@
-<template>
-	<div v-if="getCategories">
-		<VueSlickCarousel v-bind="slickCarouselSettings" class="categorySlider mt-2">
-			<CategorySliderCard
-				v-for="(category, index) in getCategories"
-				:key="index"
-				:category="category"
-			/>
-		</VueSlickCarousel>
-	</div>
-</template>
+<template lang="pug" src="./CCategorySlider.pug"/>
 
 <script>
 import VueSlickCarousel from 'vue-slick-carousel';
@@ -16,11 +6,11 @@ import VueSlickCarousel from 'vue-slick-carousel';
 import { mapActions } from 'vuex';
 
 // Component
-import CategorySliderCard from './CategorySliderCard';
+import CCategorySliderCard from './CCategorySliderCard/CCategorySliderCard.vue';
 
 export default {
-	name: 'CategorySlider',
-	components: { VueSlickCarousel, CategorySliderCard },
+	name: 'CCategorySlider',
+	components: { VueSlickCarousel, CCategorySliderCard },
 	props: ['getCategories'],
 	data() {
 		return {

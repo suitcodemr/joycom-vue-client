@@ -1,0 +1,10 @@
+div(v-if="this.dates.arrDates.length > 0" class="dateSliderWrapper")
+	.chooseDate
+		button Kalender
+	VueSlickCarousel(v-bind="slickCarouselSettings" class="dateSlider")
+		CDateSliderCard(
+                  v-for="(date, index) in dates.arrDates"
+                  :key="index"
+                  :date="date"
+                  :currentDayIndex="dates.currentDayIndex"
+            )

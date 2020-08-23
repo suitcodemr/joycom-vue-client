@@ -1,0 +1,9 @@
+@import './breakpoints';
+
+
+.container-mobile {
+	@include lg-max {
+		max-width: 100%;
+		padding: 0;
+	}
+}

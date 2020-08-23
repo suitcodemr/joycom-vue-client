@@ -11,7 +11,6 @@ export default {
 		close: function() {
 			var v = this;
 			setTimeout(function() {
-				console.log('close');
             v.$destroy();
             v.$el.parentNode.removeChild(v.$el);
 			}, 2000);
